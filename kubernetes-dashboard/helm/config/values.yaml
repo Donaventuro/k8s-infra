@@ -1,0 +1,37 @@
+user:
+- name: admin
+  rules:
+  - apiGroups:
+    - "*"
+    resources:
+    - "*"
+    verbs:
+    - "*"
+- name: readonly
+  rules:
+  - apiGroups:
+    - "*"
+    resources:
+    - events
+    - cronjobs
+    - daemonsets
+    - deployments
+    - jobs
+    - pods
+    - pods/portforward
+    - pods/log
+    - pods/exec
+    - replicasets
+    - replicationcontrollers
+    - statefulsets
+    - services
+    - configmaps
+    - persistentvolumeclaims
+    - storageclasses
+    - namespaces
+    - nodes
+    - persistentvolumes
+    verbs:
+    - get
+    - list
+    - watch

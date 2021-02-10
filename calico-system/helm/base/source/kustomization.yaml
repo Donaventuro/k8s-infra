@@ -1,0 +1,6 @@
+resources:
+- resources/calico.yaml
+patchesStrategicMerge:
+- manifests/calico-kube-controllers-deployment.yaml
+- manifests/calico-node-daemonset.yaml
+namespace: calico-system

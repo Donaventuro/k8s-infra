@@ -1,0 +1,42 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: controlplane
+spec:
+  profile: default
+  hub: docker.io/istio
+  tag: 1.9.0
+  components:
+    ingressGateways:
+    - name: istio-ingressgateway
+      k8s:
+        overlays:
+        - kind: Deployment
+          name: istio-ingressgateway
+          patches:
+          - path: kind
+            value: DaemonSet
+        service:
+          ports:
+          - name: http2
+            protocol: TCP
+            port: 80
+            targetPort: 8080
+            nodePort: 31080
+          - name: https
+            protocol: TCP
+            port: 443
+            targetPort: 8443
+            nodePort: 31443
+          - name: status-port
+            protocol: TCP
+            port: 15021
+            targetPort: 15021
+          - name: tcp-istiod
+            protocol: TCP
+            port: 15012
+            targetPort: 15012
+          - name: tls
+            protocol: TCP
+            port: 15443
+            targetPort: 15443

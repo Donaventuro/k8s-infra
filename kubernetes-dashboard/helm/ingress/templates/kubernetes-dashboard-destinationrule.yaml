@@ -1,0 +1,10 @@
+{{ $service := "kubernetes-dashboard"}}
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ $service }}
+spec:
+  host: {{ $service }}
+  trafficPolicy:
+    tls:
+      mode: SIMPLE

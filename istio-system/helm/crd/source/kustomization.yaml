@@ -1,0 +1,14 @@
+resources:
+- resources/crd-all.gen.yaml
+- resources/crd-operator.yaml
+patchesStrategicMerge:
+- manifests/authorizationpolicies.security.istio.io-customresourcedefinition.yaml
+- manifests/destinationrules.networking.istio.io-customresourcedefinition.yaml
+- manifests/envoyfilters.networking.istio.io-customresourcedefinition.yaml
+- manifests/gateways.networking.istio.io-customresourcedefinition.yaml
+- manifests/peerauthentications.security.istio.io-customresourcedefinition.yaml
+- manifests/requestauthentications.security.istio.io-customresourcedefinition.yaml
+- manifests/serviceentries.networking.istio.io-customresourcedefinition.yaml
+- manifests/sidecars.networking.istio.io-customresourcedefinition.yaml
+- manifests/virtualservices.networking.istio.io-customresourcedefinition.yaml
+- manifests/workloadentries.networking.istio.io-customresourcedefinition.yaml

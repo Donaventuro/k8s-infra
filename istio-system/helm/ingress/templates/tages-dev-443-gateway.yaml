@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: tages-dev-443
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - "*"
+    port:
+      number: 443
+      name: HTTPS
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: cert-tages.dev

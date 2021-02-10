@@ -1,0 +1,17 @@
+---
+# Source: promtail/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: logging-promtail
+  namespace: logging
+  labels:
+    app: promtail
+    chart: promtail-2.2.0
+    heritage: Helm
+    release: logging-promtail
+rules:
+- apiGroups:      ['extensions']
+  resources:      ['podsecuritypolicies']
+  verbs:          ['use']
+  resourceNames:  [logging-promtail]

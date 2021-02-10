@@ -1,0 +1,19 @@
+---
+# Source: nfs-client-provisioner/templates/rolebinding.yaml
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    app: nfs-client-provisioner
+    chart: nfs-client-provisioner-1.2.11
+    heritage: Helm
+    release: csi-nfs-hdd
+  name: leader-locking-csi-nfs-hdd
+subjects:
+  - kind: ServiceAccount
+    name: csi-nfs-hdd
+    namespace: csi-nfs-hdd
+roleRef:
+  kind: Role
+  name: leader-locking-csi-nfs-hdd
+  apiGroup: rbac.authorization.k8s.io

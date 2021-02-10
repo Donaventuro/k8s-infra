@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shell-operator
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shell-operator
+  template:
+    metadata:
+      labels:
+        app: shell-operator
+    spec:
+      serviceAccountName: shell-operator
+      volumes:
+      - name: hook
+        configMap:
+          defaultMode: 100
+          name: hook
+      containers:
+      - name: shell-operator
+        image: flant/shell-operator:v1.0.0-rc.1
+        volumeMounts:
+        - name: hook
+          mountPath: /hooks

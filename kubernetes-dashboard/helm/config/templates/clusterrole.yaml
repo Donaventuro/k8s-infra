@@ -1,0 +1,8 @@
+{{- range $key, $user := $.Values.user }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ printf "user-%s" $user.name }}
+rules: {{ toYaml $user.rules | trim | nindent 0 }}
+---
+{{- end }}

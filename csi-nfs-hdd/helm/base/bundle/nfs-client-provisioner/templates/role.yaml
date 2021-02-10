@@ -1,0 +1,15 @@
+---
+# Source: nfs-client-provisioner/templates/role.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    app: nfs-client-provisioner
+    chart: nfs-client-provisioner-1.2.11
+    heritage: Helm
+    release: csi-nfs-hdd
+  name: leader-locking-csi-nfs-hdd
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]

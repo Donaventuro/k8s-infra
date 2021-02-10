@@ -1,0 +1,6 @@
+fullnameOverride: csi-nfs-hdd
+nfs:
+  server: 10.0.30.100
+  path: /var/nfs/k8s
+storageClass:
+  name: nfs-hdd

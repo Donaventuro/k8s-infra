@@ -1,0 +1,23 @@
+---
+# Source: loki/templates/service-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: logging-loki-headless
+  namespace: logging
+  labels:
+    app: loki
+    chart: loki-2.3.0
+    release: logging-loki
+    heritage: Helm
+    variant: headless
+spec:
+  clusterIP: None
+  ports:
+    - port: 3100
+      protocol: TCP
+      name: http-metrics
+      targetPort: http-metrics
+  selector:
+    app: loki
+    release: logging-loki

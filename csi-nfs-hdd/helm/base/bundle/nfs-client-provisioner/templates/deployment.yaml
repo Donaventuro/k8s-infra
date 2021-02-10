@@ -1,0 +1,46 @@
+---
+# Source: nfs-client-provisioner/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: csi-nfs-hdd
+  labels:
+    app: nfs-client-provisioner
+    chart: nfs-client-provisioner-1.2.11
+    heritage: Helm
+    release: csi-nfs-hdd
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+      release: csi-nfs-hdd
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: nfs-client-provisioner
+        release: csi-nfs-hdd
+    spec:
+      serviceAccountName: csi-nfs-hdd
+      containers:
+        - name: nfs-client-provisioner
+          image: "quay.io/external_storage/nfs-client-provisioner:v3.1.0-k8s1.11"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: cluster.local/csi-nfs-hdd
+            - name: NFS_SERVER
+              value: 10.0.30.100
+            - name: NFS_PATH
+              value: /var/nfs/k8s
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: 10.0.30.100
+            path: /var/nfs/k8s
